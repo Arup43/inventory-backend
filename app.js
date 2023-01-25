@@ -49,4 +49,16 @@ mongoose.connect(URI, OPTIONS, (err) => {
     }
 });
 
+//Routing Implementation
+const router = require('./src/routes/api');
+app.use("/api/v1", router);
+
+//Undefined Route Handler
+app.use("*", (req, res) => {
+    res.status(404).json({
+        status: "fail",
+        message: "Invalid Route"
+    });
+});
+
 module.exports = app;
